@@ -22,7 +22,7 @@ then
 	exit 1
 else
 	apps=$(ykman oath list | cut -d ':' -f 1)
-	selected=$(echo -e "$apps" | $menu -p $prompt)
+	selected=$(echo "$apps" | $menu -p $prompt)
 	ykman oath code -s $selected 
 fi
 
