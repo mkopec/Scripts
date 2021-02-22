@@ -13,8 +13,9 @@ while getopts "m:p:" options; do
 		"p")
 			prompt=$OPTARG;;
 	esac
-	shift $((OPTIND-1))
 done
+
+shift "$((OPTIND-1))"
 
 if [ $nkeys == 0 ]
 then
