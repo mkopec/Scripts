@@ -1,8 +1,8 @@
 #!/bin/bash
-# A simple audio switcher for pulseaudio using dmenu or a dmenu-compatible menu.
+# A simple audio switcher for pulseaudio using bemenu
 
 prompt="pulseaudio"
-menu="dmenu"
+menu="bemenu"
 devices=$(pacmd list-sinks | grep -e index -e device.description | sed 's/index://g;s/device.description = "//g;s/\t//g;s/"//g' | paste -d" " - -)
 activeindex=$(( $(echo "$devices" | grep -n "*" | cut -d : -f 1) -1))
 
