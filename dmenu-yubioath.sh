@@ -14,12 +14,11 @@ while getopts "m:p:" options; do
 			prompt=$OPTARG;;
 	esac
 done
-
 shift "$((OPTIND-1))"
 
 if [ $nkeys == 0 ]
 then
-	echo "No YubiKey connected !" | $menu -p $prompt
+	echo "No YubiKey connected!" | $menu -p $prompt
 	exit 1
 else
 	apps=$(ykman oath list | cut -d ':' -f 1)
