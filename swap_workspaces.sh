@@ -1,5 +1,5 @@
 #!/bin/bash
-# A script to swap workspaces between 2 active monitors.
+# A script for sway to swap workspaces between 2 active monitors.
 # Will only work correctly with 2 monitors attached.
 
 output_1_name=$(swaymsg -t get_outputs --raw | jq '.[0].name' -r)
