@@ -1,4 +1,6 @@
 #!/bin/bash
+# A script to retrieve OATH-TOTP codes from a Yubikey using dmenu or a dmenu-compatible menu.
+# Depends on yubikey-manager.
 
 menu="dmenu"
 prompt="yubioath"
