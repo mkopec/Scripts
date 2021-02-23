@@ -14,11 +14,13 @@ while getopts "m:p:" opts; do
 done
 shift "$((OPTIND-1))"
 
-options="Shut down\nSuspend\nReboot\nLog out\nReboot into Windows"
+options="Lock screen\nShut down\nSuspend\nReboot\nLog out\nReboot into Windows"
 
 option=$(echo -e $options | $menu -p $prompt)
 
 case $option in
+	"Lock screen")
+		swaylock -f;;
 	"Shut down")
 		systemctl poweroff;;
 	"Suspend")
