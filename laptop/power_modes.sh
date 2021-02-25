@@ -28,7 +28,7 @@ while true; do
 		ryzenadj --fast-limit=25000 --slow-limit=23000 --stapm-limit=23000 --tctl-temp=96 --apu-skin-temp=53
 		sleep 0.1
 		;;
-	ultra | u)
+	ultra | u) # Not an official setting from Lenovo, use at your own risk
 		ryzenadj --fast-limit=27000 --slow-limit=27000 --stapm-limit=27000 --tctl-temp=96 --apu-skin-temp=70
 		sleep 0.1
 		;;
