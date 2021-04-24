@@ -1,10 +1,13 @@
 #!/bin/bash
-# A simple audio switcher for pulseaudio using bemenu
+# A simple audio sink switcher for pulseaudio using bemenu and pactl
+# dmenu also works, but it's missing the -I option for highlighting the active sink
+# It'll probably fail if you have multiple sinks with the exact same descriptions
 
 prompt="pulseaudio"
 menu="bemenu"
-devices=$(pacmd list-sinks | grep -e index -e device.description | sed 's/index://g;s/device.description = "//g;s/\t//g;s/"//g' | paste -d" " - -)
-activeindex=$(( $(echo "$devices" | grep -n "*" | cut -d : -f 1) -1))
+sinks=$(pactl list sinks | grep -e "Name: " -e "Description: " | sed 's/Name: //g;s/Description: //g;s/\t//g' | paste -d"\t" - -)
+activesink=$(pactl info | grep "Default Sink" | sed 's/Default Sink: //g')
+index=$(( $(echo "$sinks" | grep -n $activesink | cut -d : -f 1) -1))
 
 while getopts "m:p:" options; do
 	case "${options}" in
@@ -16,6 +19,6 @@ while getopts "m:p:" options; do
 done
 shift "$((OPTIND-1))"
 
-selected=$(echo "$devices" | $menu -p $prompt -I $activeindex | sed 's@^[^0-9]*\([0-9]\+\).*@\1@')
+selection=$(echo "$sinks" | grep "$(echo "$sinks" | cut -f 2 | $menu -p $prompt -I $index)" | cut -f 1)
 
-pactl set-default-sink $selected
+pactl set-default-sink $selection
