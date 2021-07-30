@@ -30,5 +30,5 @@ case $option in
 	"Log out")
 		swaymsg exit;;
 	"Reboot into Windows")
-		windows;;
+		systemctl reboot --boot-loader-entry=auto-windows;;
 esac
